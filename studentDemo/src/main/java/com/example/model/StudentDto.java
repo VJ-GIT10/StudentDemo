@@ -16,6 +16,6 @@ import lombok.ToString;
 public class StudentDto {
 
 	private int id;
-	private String studentName;
+	private name;
 	private List<MarksDto> markList;
 }
