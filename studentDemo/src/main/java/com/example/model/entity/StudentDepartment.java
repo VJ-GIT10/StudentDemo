@@ -25,8 +25,9 @@ public class StudentDepartment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int sid;
 	private int id;
-	private String departmentName;
+	private String name;
 	@OneToMany(targetEntity=Student.class , mappedBy="studentId",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<Student> student;
 }

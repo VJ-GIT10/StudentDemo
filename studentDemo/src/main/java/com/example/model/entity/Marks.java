@@ -21,7 +21,7 @@ public class Marks {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String subjectName;
-	private int marks;
+	private int mark;
 	
 
 }

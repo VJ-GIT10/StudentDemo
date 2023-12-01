@@ -19,8 +19,8 @@ import lombok.ToString;
 @ToString
 public class StudentDepartmentDto {
 
+	private int sid;
 	private int id;
-	private String departmentName;
-	@OneToMany(targetEntity=Student.class, mappedBy="id", fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	private String name;
 	private List<StudentDto> student;
 }

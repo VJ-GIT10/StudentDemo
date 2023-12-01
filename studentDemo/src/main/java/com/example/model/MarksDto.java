@@ -13,5 +13,5 @@ public class MarksDto {
 
 	private int id;
 	private String subjectName;
-	private Integer marks;
+	private Integer mark;
 }

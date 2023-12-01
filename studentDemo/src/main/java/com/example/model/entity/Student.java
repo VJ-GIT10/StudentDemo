@@ -22,8 +22,8 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int studentId;
-	private String studentName;
+	private int id;
+	private String name;
 	@OneToMany(targetEntity = Marks.class, mappedBy = "id", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Marks> markList;
 
