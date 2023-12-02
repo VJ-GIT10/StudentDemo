@@ -25,55 +25,79 @@ import com.example.model.entity.StudentDepartment;
 import com.example.service.StudentService;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 public class StudentControllerTest {
 
 	@InjectMocks
-	private StudentController student;
+	private StudentController Student;
 
 	@Mock
 	private StudentService testStudentService;
 
 	@Test
-	public void testSaveStudentRecord() {
+	public void testSaveStudentDtoRecord() {
 
-		String result = "Student Record Succesfully Created";
 		String Expected = "Student Record Succesfully Created";
-		when(testStudentService.createStudentDetails(Mockito.any())).thenReturn(result);
-		assertEquals(Expected, result);
+		
+		MarksDto marksDto1 = new MarksDto(1, "Maths", 100);
+		MarksDto marksDto2 = new MarksDto(2, "English", 100);
+		
+		List<MarksDto> lstMarksDto1 = new ArrayList<>();
+		lstMarksDto1.add(marksDto1);
+		lstMarksDto1.add(marksDto2);
+
+		MarksDto marksDto3 = new MarksDto(3, "Maths", 90);
+		MarksDto marksDto4 = new MarksDto(4, "English", 99);
+
+		List<MarksDto> lstMarksDto2 = new ArrayList<>();
+		lstMarksDto2.add(marksDto3);
+		lstMarksDto2.add(marksDto4);
+
+		StudentDto StudentDto1 = new StudentDto(100, "Vijay", lstMarksDto1);
+		StudentDto StudentDto2 = new StudentDto(101, "Ajay", lstMarksDto2);
+
+		List<StudentDto> lstStudentDto = new ArrayList<>();
+		lstStudentDto.add(StudentDto1);
+		lstStudentDto.add(StudentDto2);
+		
+		StudentDepartmentDto studentDepartmentDto = new StudentDepartmentDto(100,1, "CSC", lstStudentDto);
+		when(testStudentService.createStudentDetails(Mockito.any())).thenReturn(Expected);
+		String Actual =testStudentService.createStudentDetails(studentDepartmentDto);
+		assertEquals(Expected, Actual);
 
 	}
 
+	@Test
 	public void fetchStudentByDepartmentIdTest() {
 
-		Marks marks1 = new Marks(1, "Maths", 100);
+		MarksDto marksDto1 = new MarksDto(1, "Maths", 100);
+		MarksDto marksDto2 = new MarksDto(2, "English", 100);
+		
+		List<MarksDto> lstMarksDto1 = new ArrayList<>();
+		lstMarksDto1.add(marksDto1);
+		lstMarksDto1.add(marksDto2);
 
-		Marks marks2 = new Marks(2, "English", 100);
+		MarksDto marksDto3 = new MarksDto(3, "Maths", 90);
+		MarksDto marksDto4 = new MarksDto(4, "English", 99);
 
-		List<Marks> lstMarks1 = new ArrayList<>();
-		lstMarks1.add(marks1);
-		lstMarks1.add(marks2);
+		List<MarksDto> lstMarksDto2 = new ArrayList<>();
+		lstMarksDto2.add(marksDto3);
+		lstMarksDto2.add(marksDto4);
 
-		Marks marks3 = new Marks(3, "Maths", 90);
+		StudentDto StudentDto1 = new StudentDto(100, "Vijay", lstMarksDto1);
+		StudentDto StudentDto2 = new StudentDto(101, "Ajay", lstMarksDto2);
 
-		Marks marks4 = new Marks(4, "English", 99);
-
-		List<Marks> lstMarks2 = new ArrayList<>();
-		lstMarks2.add(marks3);
-		lstMarks2.add(marks4);
-
-		Student student1 = new Student(100, "Vijay", lstMarks1);
-		Student student2 = new Student(101, "Ajay", lstMarks2);
-
-		List<Student> lstStudent = new ArrayList<>();
-		lstStudent.add(student1);
-		lstStudent.add(student2);
-		StudentDepartment studentDepartment = new StudentDepartment(1, "CSC", lstStudent);
-		List<StudentDepartment> lstStudentDepartment = new ArrayList<>();
-		lstStudentDepartment.add(studentDepartment);
-		int actual = lstStudentDepartment.size();
-		when(testStudentService.fetchStudentByDepartmentId(Mockito.anyInt())).thenReturn(lstStudentDepartment);
-		assertEquals(actual, lstStudentDepartment.size(), "OutPut List size is equal");
+		List<StudentDto> lstStudentDto = new ArrayList<>();
+		lstStudentDto.add(StudentDto1);
+		lstStudentDto.add(StudentDto2);
+		
+		StudentDepartmentDto studentDepartmentDto = new StudentDepartmentDto(100,1, "CSC", lstStudentDto);
+		List<StudentDepartmentDto> lstStudentDepartmentDto = new ArrayList<>();
+		lstStudentDepartmentDto.add(studentDepartmentDto);
+		
+		when(testStudentService.fetchStudentByDepartmentId(Mockito.anyInt())).thenReturn(lstStudentDepartmentDto);
+		List<StudentDepartmentDto>actual=testStudentService.fetchStudentByDepartmentId(1);
+		System.out.println(actual);
+		assertEquals(actual.get(0).getName(), lstStudentDepartmentDto.get(0).getName(), "Student Name is Matching");
 	}
 
 }

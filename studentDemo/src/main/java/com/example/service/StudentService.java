@@ -2,7 +2,6 @@ package com.example.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,24 +39,22 @@ public class StudentService {
 		StudentDepartmentDto dto = modelMapper.map(department, StudentDepartmentDto.class);
 		return dto;
 	}
-//
-//	public List<StudentDepartmentDto> fetchStudentByDepartmentId(int id) {
-//
-//		List<StudentDepartmentDto> studentDepartmentDto = new ArrayList<>();
-//		List<StudentDepartment> studentDepartment = studentRepository.findAllById(id);
-//
-//		for (StudentDepartment studData : studentDepartment) {
-//			studentDepartmentDto.add(generateDtoFromEntity(studData));
-//		}
-//		return studentDepartmentDto;
-//	}
-	
-	public List<StudentDepartment> fetchStudentByDepartmentId(int id) {
 
-		return new ArrayList<StudentDepartment> ( studentRepository.findAllById(id));
+	public List<StudentDepartmentDto> fetchStudentByDepartmentId(int id) {
 
-		
+		List<StudentDepartmentDto> studentDepartmentDto = new ArrayList<>();
+		List<StudentDepartment> studentDepartment = studentRepository.findAllById(id);
+
+		for (StudentDepartment studData : studentDepartment) {
+			studentDepartmentDto.add(generateDtoFromEntity(studData));
+		}
+		return studentDepartmentDto;
 	}
+	
+//	public List<StudentDepartment> fetchStudentByDepartmentId(int id) {
+//
+//		return new ArrayList<StudentDepartment> ( studentRepository.findAllById(id));
+//	}
 
 	public void deleteStudentById(int id) {
 		
