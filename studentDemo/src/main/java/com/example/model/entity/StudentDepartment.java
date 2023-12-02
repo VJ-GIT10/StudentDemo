@@ -28,6 +28,6 @@ public class StudentDepartment {
 	private int sid;
 	private int id;
 	private String name;
-	@OneToMany(targetEntity=Student.class , mappedBy="studentId",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Student.class , mappedBy="id",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<Student> student;
 }
